@@ -9,10 +9,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-02-04T16:50:07+01:00\n"
+"POT-Creation-Date: 2022-02-04T17:38:24+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
-"X-Domain: auto-category\n"
+"X-Domain: auto-category-for-posts\n"
 
 #. Plugin Name of the plugin
 msgid "Auto Category for Posts"
@@ -31,11 +31,11 @@ msgid "https://www.thomaszwirner.de"
 msgstr ""
 
 #: auto-category-for-posts.php:78
-#: assets/js.js:23
+#: admin/js.js:23
 msgid "Set as default"
 msgstr ""
 
 #: auto-category-for-posts.php:81
-#: assets/js.js:25
+#: admin/js.js:25
 msgid "Default category"
 msgstr ""
