@@ -35,7 +35,9 @@ function auto_category_init() {
 add_action( 'init', 'auto_category_init' );
 
 /**
- * Add category on save_post.
+ * Set the default category on save_post.
+ * This way the category is already set before the editor outputs this assignment.
+ * According to wp-standard this is only visible after saving by the user.
  *
  * @param $post_id
  * @param $post
@@ -130,15 +132,22 @@ add_action( 'admin_enqueue_scripts', 'auto_category_load_ajax' );
  * @return void
  */
 function auto_category_ajax(){
-    // get old default term_id
-    $result['old_default_category_id'] = get_option( AUTOCATEGORY_OPTIONNAME, true );
+    if( is_user_logged_in() && !empty($_GET['term_id']) ) {
+        // get old default term_id
+        $result['old_default_category_id'] = get_option(AUTOCATEGORY_OPTIONNAME, true);
 
-    // return the new term_id
-    $result['new_default_category_id'] = $_GET['term_id'];
+        // return the new term_id
+        $result['new_default_category_id'] = $_GET['term_id'];
 
-    // update term_id
-    $result['result'] = update_option( AUTOCATEGORY_OPTIONNAME, $_GET['term_id'] );
-    echo json_encode($result);
-    exit();
+        // update term_id
+        $result['result'] = update_option(AUTOCATEGORY_OPTIONNAME, $_GET['term_id']);
+
+        // update default_category in WP
+        update_option('default_category', $_GET['term_id']);
+
+        // Return result
+        echo json_encode($result);
+        exit();
+    }
 }
 add_action( 'wp_ajax_auto_category_change_state', 'auto_category_ajax' );
