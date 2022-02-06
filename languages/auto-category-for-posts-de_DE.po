@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Auto Category for Posts 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/auto-category-for-"
 "posts\n"
-"POT-Creation-Date: 2022-02-04T17:38:24+01:00\n"
-"PO-Revision-Date: 2022-02-04 17:40+0100\n"
+"POT-Creation-Date: 2022-02-06T12:30:48+01:00\n"
+"PO-Revision-Date: 2022-02-06 12:32+0100\n"
 "Last-Translator: Thomas Zwirner <info@thomaszwirner.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -19,11 +19,15 @@ msgstr ""
 
 #. Plugin Name of the plugin
 msgid "Auto Category for Posts"
-msgstr "Automatische Kategorie für Beiträge"
+msgstr "Automatische Kategorie-Zuordnung zu Beiträgen"
 
 #. Description of the plugin
-msgid "Automatically add a default-category to each new post."
-msgstr "Setzt automatisch eine Standard-Kategorie bei jedem neuen Beitrag."
+msgid ""
+"Automatically add a default-category to each new post before it is first "
+"saved."
+msgstr ""
+"Ergänzt die Standard-Kategorie automatisch an jedem Beitrag bevor dieser "
+"initial gespeichert wird."
 
 #. Author of the plugin
 msgid "Thomas Zwirner"

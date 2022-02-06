@@ -1,17 +1,15 @@
 <?php
 /**
  * Plugin Name:       Auto Category for Posts
- * Description:       Automatically add a default-category to each new post.
+ * Description:       Automatically add a default-category to each new post before it is first saved.
  * Requires at least: 5.8
  * Requires PHP:      7.4
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Thomas Zwirner
  * Author URI:		  https://www.thomaszwirner.de
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       auto-category-for-posts
- *
- * @package           create-block
  */
 
 // Exit if accessed directly.
@@ -19,7 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-const AUTOCATEGORY_OPTIONNAME = 'auto_category_id';
+const AUTOCATEGORY_OPTIONNAME = 'default_category';
+const AUTOCATEGORY_VERSION = '1.0.1';
 
 register_activation_hook( __FILE__, 'auto_category_activation');
 register_deactivation_hook(__FILE__, 'auto_category_deactivation');
@@ -33,6 +32,22 @@ function auto_category_init() {
     load_plugin_textdomain( 'auto-category-for-posts', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 }
 add_action( 'init', 'auto_category_init' );
+
+/**
+ * Check for necessary steps after plugin-updates.
+ *
+ * @return void
+ */
+function auto_category_update_check() {
+    if( is_admin() && is_user_logged_in() ) {
+        if (get_option('auto_category_db_version') != AUTOCATEGORY_VERSION) {
+            // remove old option used in version 1.0.0
+            delete_option('auto_category_id');
+        }
+        update_option('auto_category_db_version', AUTOCATEGORY_VERSION);
+    }
+}
+add_action( 'plugins_loaded', 'auto_category_update_check' );
 
 /**
  * Set the default category on save_post.
@@ -79,7 +94,7 @@ function auto_category_add_term_action( $actions, $tag ){
     if($tag->taxonomy == 'category'):
         $text = __('Set as default', 'auto-category-for-posts');
         $value = '';
-        if( $tag->term_id == get_option( AUTOCATEGORY_OPTIONNAME, true ) ) {
+        if( $tag->term_id === (int)get_option( AUTOCATEGORY_OPTIONNAME ) ) {
             $text = __('Default category', 'auto-category-for-posts');
             $value = ' class="default_category"';
         }
@@ -95,8 +110,7 @@ add_filter( 'tag_row_actions', 'auto_category_add_term_action', 10, 2 );
  * @return void
  */
 function auto_category_activation() {
-    // add option for default category if not set
-    add_option(AUTOCATEGORY_OPTIONNAME, 0, '', true);
+    // nothing
 }
 
 /**
@@ -141,9 +155,6 @@ function auto_category_ajax(){
 
         // update term_id
         $result['result'] = update_option(AUTOCATEGORY_OPTIONNAME, $_GET['term_id']);
-
-        // update default_category in WP
-        update_option('default_category', $_GET['term_id']);
 
         // Return result
         echo json_encode($result);
