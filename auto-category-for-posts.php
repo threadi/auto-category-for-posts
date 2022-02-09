@@ -4,7 +4,7 @@
  * Description:       Automatically add a default-category to each new post before it is first saved.
  * Requires at least: 5.8
  * Requires PHP:      7.4
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author:            Thomas Zwirner
  * Author URI:		  https://www.thomaszwirner.de
  * License:           GPL-2.0-or-later
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 const AUTOCATEGORY_OPTIONNAME = 'default_category';
-const AUTOCATEGORY_VERSION = '1.0.1';
+const AUTOCATEGORY_VERSION = '1.0.2';
 
 register_activation_hook( __FILE__, 'auto_category_activation');
 register_deactivation_hook(__FILE__, 'auto_category_deactivation');
@@ -91,14 +91,17 @@ add_action( 'save_post', 'auto_category_save_post', 10, 3 );
  * @return mixed
  */
 function auto_category_add_term_action( $actions, $tag ){
-    if($tag->taxonomy == 'category'):
-        $text = __('Set as default', 'auto-category-for-posts');
-        $value = '';
-        if( $tag->term_id === (int)get_option( AUTOCATEGORY_OPTIONNAME ) ) {
-            $text = __('Default category', 'auto-category-for-posts');
-            $value = ' class="default_category"';
+    if( $tag->taxonomy == 'category' ):
+        $tax = get_taxonomy('category');
+        if( current_user_can( $tax->cap->manage_terms) ) {
+            $text = __('Set as default', 'auto-category-for-posts');
+            $value = '';
+            if ($tag->term_id === (int)get_option(AUTOCATEGORY_OPTIONNAME)) {
+                $text = __('Default category', 'auto-category-for-posts');
+                $value = ' class="default_category"';
+            }
+            $actions['auto_category'] = '<a href="#"' . $value . ' data-termid="' . $tag->term_id . '" data-nonce="'.wp_create_nonce( 'auto_category_change_state' ).'">' . $text . '</a>';
         }
-        $actions['auto_category'] = '<a href="#"'.$value.' data-termid="'.$tag->term_id.'">'.$text.'</a>';
     endif;
     return $actions;
 }
@@ -146,19 +149,48 @@ add_action( 'admin_enqueue_scripts', 'auto_category_load_ajax' );
  * @return void
  */
 function auto_category_ajax(){
-    if( is_user_logged_in() && !empty($_GET['term_id']) ) {
-        // get old default term_id
-        $result['old_default_category_id'] = get_option(AUTOCATEGORY_OPTIONNAME, true);
+    $result = [
+        'error' => __('Error on saving new settings for default category.', 'auto-category-for-posts')
+    ];
+    if( is_user_logged_in() ) {
+        $tax = get_taxonomy('category');
+        if( !empty($_GET['nonce'])
+            && wp_verify_nonce( $_GET['nonce'], 'auto_category_change_state' )
+            && current_user_can( $tax->cap->manage_terms)
+            && !empty($_GET['term_id'])
+        ) {
+            // get new term_id-value from request
+            $term_id = absint(sanitize_text_field($_GET['term_id']));
 
-        // return the new term_id
-        $result['new_default_category_id'] = $_GET['term_id'];
+            // create array for the resulting data
+            $result = [];
+            // -> set result to false
+            $result['result'] = false;
+            // -> get old default term_id
+            $result['old_default_category_id'] = (int)get_option(AUTOCATEGORY_OPTIONNAME, true);
+            // -> initialize new cat id
+            $result['new_default_category_id'] = 0;
+            if( $term_id > 0 ) {
+                // check if given id exists as category
+                if( category_exists($term_id) ) {
 
-        // update term_id
-        $result['result'] = update_option(AUTOCATEGORY_OPTIONNAME, $_GET['term_id']);
+                    // return the new term_id
+                    $result['new_default_category_id'] = $term_id;
 
-        // Return result
-        echo json_encode($result);
-        exit();
+                    // update term_id
+                    $result['result'] = update_option(AUTOCATEGORY_OPTIONNAME, $term_id);
+                }
+                else {
+                    $result['error'] = __('Given category does not exists.', 'auto-category-for-posts');
+                }
+            }
+            else {
+                $result['error'] = __('No new category-id given.', 'auto-category-for-posts');
+            }
+        }
     }
+    // return the result
+    echo json_encode($result);
+    exit;
 }
 add_action( 'wp_ajax_auto_category_change_state', 'auto_category_ajax' );

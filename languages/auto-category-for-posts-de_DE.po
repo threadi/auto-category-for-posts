@@ -2,11 +2,11 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Auto Category for Posts 1.0.0\n"
+"Project-Id-Version: Auto Category for Posts 1.0.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/auto-category-for-"
 "posts\n"
-"POT-Creation-Date: 2022-02-06T12:30:48+01:00\n"
-"PO-Revision-Date: 2022-02-06 12:32+0100\n"
+"POT-Creation-Date: 2022-02-09T15:01:42+01:00\n"
+"PO-Revision-Date: 2022-02-09 15:03+0100\n"
 "Last-Translator: Thomas Zwirner <info@thomaszwirner.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -19,15 +19,15 @@ msgstr ""
 
 #. Plugin Name of the plugin
 msgid "Auto Category for Posts"
-msgstr "Automatische Kategorie-Zuordnung zu Beiträgen"
+msgstr "Automatische Kategorie für Beiträge"
 
 #. Description of the plugin
 msgid ""
 "Automatically add a default-category to each new post before it is first "
 "saved."
 msgstr ""
-"Ergänzt die Standard-Kategorie automatisch an jedem Beitrag bevor dieser "
-"initial gespeichert wird."
+"Setzt die Standard-Kategorie an neuen Beiträgen bereits bevor diese erstmals "
+"gespeichert werden."
 
 #. Author of the plugin
 msgid "Thomas Zwirner"
@@ -37,10 +37,22 @@ msgstr "Thomas Zwirner"
 msgid "https://www.thomaszwirner.de"
 msgstr "https://www.thomaszwirner.de"
 
-#: auto-category-for-posts.php:78 admin/js.js:23
+#: auto-category-for-posts.php:97 admin/js.js:24
 msgid "Set as default"
-msgstr "Als Standard-Kategorie setzen"
+msgstr "Setze als Standard-Kategorie"
 
-#: auto-category-for-posts.php:81 admin/js.js:25
+#: auto-category-for-posts.php:100 admin/js.js:26
 msgid "Default category"
 msgstr "Standard-Kategorie"
+
+#: auto-category-for-posts.php:153
+msgid "Error on saving new settings for default category."
+msgstr "Fehler beim Speichern der neuen Einstellungen zur Standard-Kategorie."
+
+#: auto-category-for-posts.php:184
+msgid "Given category does not exists."
+msgstr "Die übergebene Kategorie existiert nicht."
+
+#: auto-category-for-posts.php:188
+msgid "No new category-id given."
+msgstr "Keine Kategorie übergeben."

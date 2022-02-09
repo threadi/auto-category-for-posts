@@ -11,7 +11,8 @@ function change_publish_states(el){
     jQuery.getJSON(ajaxurl,
         {
             term_id: el.data("termid"),
-            action: "auto_category_change_state"
+            action: "auto_category_change_state",
+            nonce: el.data("nonce")
         },
         function(data) {
             if (data.error){
