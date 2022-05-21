@@ -4,7 +4,7 @@
  * Description:       Automatically add a default-category to each new post before it is first saved.
  * Requires at least: 5.8
  * Requires PHP:      7.4
- * Version:           1.0.2
+ * Version:           1.0.3
  * Author:            Thomas Zwirner
  * Author URI:		  https://www.thomaszwirner.de
  * License:           GPL-2.0-or-later
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 const AUTOCATEGORY_OPTIONNAME = 'default_category';
-const AUTOCATEGORY_VERSION = '1.0.2';
+const AUTOCATEGORY_VERSION = '1.0.3';
 
 register_activation_hook( __FILE__, 'auto_category_activation');
 register_deactivation_hook(__FILE__, 'auto_category_deactivation');
@@ -37,6 +37,7 @@ add_action( 'init', 'auto_category_init' );
  * Check for necessary steps after plugin-updates.
  *
  * @return void
+ * @noinspection PhpUnused
  */
 function auto_category_update_check() {
     if( is_admin() && is_user_logged_in() ) {
@@ -58,6 +59,7 @@ add_action( 'plugins_loaded', 'auto_category_update_check' );
  * @param $post
  * @param $update
  * @return void
+ * @noinspection PhpUnused
  */
 function auto_category_save_post( $post_id, $post, $update ) {
     // Only for new posts
@@ -89,6 +91,7 @@ add_action( 'save_post', 'auto_category_save_post', 10, 3 );
  * @param $actions
  * @param $tag
  * @return mixed
+ * @noinspection PhpUnused
  */
 function auto_category_add_term_action( $actions, $tag ){
     if( $tag->taxonomy == 'category' ):
@@ -147,6 +150,7 @@ add_action( 'admin_enqueue_scripts', 'auto_category_load_ajax' );
  * Set new auto category by AJAX.
  *
  * @return void
+ * @noinspection PhpUnused
  */
 function auto_category_ajax(){
     $result = [

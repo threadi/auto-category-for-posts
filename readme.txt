@@ -2,11 +2,11 @@
 Contributors: threadi
 Tags: category, auto category, posts
 Requires at least: 5.8
-Tested up to: 5.9.2
+Tested up to: 6.0
 Requires PHP: 7.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 
 == Description ==
 
@@ -42,3 +42,6 @@ Dieses Plugin ergänzt die Möglichkeit eine Standard-Kategorie für Beiträge i
 
 = 1.0.2 =
 * Security fix for AJAX-requests
+
+= 1.0.3 =
+* Updated compatibility-flag for Wordpress 6.0
