@@ -4,7 +4,7 @@
  * Description:       Automatically add a default-category to each new post before it is first saved.
  * Requires at least: 5.8
  * Requires PHP:      7.4
- * Version:           1.0.3
+ * Version:           @@VersionNumber@@
  * Author:            Thomas Zwirner
  * Author URI:		  https://www.thomaszwirner.de
  * License:           GPL-2.0-or-later
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 const AUTOCATEGORY_OPTIONNAME = 'default_category';
-const AUTOCATEGORY_VERSION = '1.0.3';
+const AUTOCATEGORY_VERSION = '@@VersionNumber@@';
 
 register_activation_hook( __FILE__, 'auto_category_activation');
 register_deactivation_hook(__FILE__, 'auto_category_deactivation');
@@ -27,6 +27,7 @@ register_deactivation_hook(__FILE__, 'auto_category_deactivation');
  * Initialize the plugin.
  *
  * @return void
+ * @noinspection PhpUnused
  */
 function auto_category_init() {
     load_plugin_textdomain( 'auto-category-for-posts', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
@@ -132,6 +133,7 @@ function auto_category_deactivation() {
  * Include js-file in admin.
  *
  * @return void
+ * @noinspection PhpUnused
  */
 function auto_category_load_ajax() {
     // only include the file on category-table
