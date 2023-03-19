@@ -2,11 +2,11 @@
 Contributors: threadi
 Tags: category, auto category, posts
 Requires at least: 5.8
-Tested up to: 6.1
+Tested up to: 6.2
 Requires PHP: 7.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 
 == Description ==
 
@@ -35,3 +35,6 @@ This plugin adds the possibility to set a default category for posts within the 
 = 1.0.4 =
 * Updated compatibility-flag for WordPress 6.0.1
 * Added build-system for repository
+
+= 1.0.5 =
+* Updated compatibility-flag for WordPress 6.2
