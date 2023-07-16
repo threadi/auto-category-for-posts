@@ -41,3 +41,17 @@ Run in main directory:
 `wp i18n make-json languages`
 
 OR use ant in build/-directory: `ant json-translations`
+
+## Check for WordPress Coding Standards
+
+### Initialize
+
+`composer install`
+
+### Run
+
+`vendor/bin/phpcs --standard=WordPress file`
+
+### Repair
+
+`vendor/bin/phpcbf --standard=WordPress file`
