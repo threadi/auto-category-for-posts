@@ -26,17 +26,6 @@ const AUTOCATEGORY_OPTIONNAME = 'default_category';
 const AUTOCATEGORY_VERSION = '@@VersionNumber@@';
 
 /**
- * Initialize the plugin.
- *
- * @return void
- * @noinspection PhpUnused
- */
-function auto_category_init(): void {
-	load_plugin_textdomain( 'auto-category-for-posts', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-}
-add_action( 'init', 'auto_category_init' );
-
-/**
  * Check for necessary steps after plugin-updates.
  *
  * @return void
