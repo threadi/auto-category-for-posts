@@ -39,7 +39,7 @@
 		<delete file="${build.dir}/${plugin.slug}_${plugin.version}.zip"/>
 		<zip destfile="${build.dir}/${plugin.slug}_${plugin.version}.zip">
 			<zipfileset dir="${src.dir}/admin" prefix="${plugin.slug}/admin" />
-			<zipfileset dir="${src.dir}/languages" prefix="${plugin.slug}/languages" />
+			<zipfileset dir="${src.dir}/languages" includes="*.json" prefix="${plugin.slug}/languages" />
 			<zipfileset dir="${src.dir}" includes="uninstall.php,readme.txt" prefix="${plugin.slug}" />
 			<zipfileset dir="${src.dir}" includes="${plugin.slug}-release.php" fullpath="${plugin.slug}/${plugin.slug}.php" />
 		</zip>

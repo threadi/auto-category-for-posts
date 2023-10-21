@@ -20,7 +20,7 @@ I recommend to use [PoEdit](https://poedit.net/) to translate texts for this plu
 
 Run in main directory:
 
-`wp i18n make-pot . languages/auto-category-for-posts.pot`
+`wp i18n make-pot . languages/auto-category-for-posts.pot --exclude=svn`
 
 ### update translation-file
 
