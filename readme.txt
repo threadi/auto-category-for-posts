@@ -2,15 +2,15 @@
 Contributors: threadi
 Tags: category, auto category, posts
 Requires at least: 5.8
-Tested up to: 6.4
+Tested up to: 6.5
 Requires PHP: 7.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 
 == Description ==
 
-This plugin adds the possibility to set a default category for posts within the category overview. The selected category will be set for each new post already when it is called for the first time and not after its first saving.
+Define a default category for each new post. This will already be set during creation of the post. You must not choose the category yourself. Use your time for the content of your posts and not for their configuration.
 
 == Installation ==
 
@@ -47,3 +47,8 @@ This plugin adds the possibility to set a default category for posts within the 
 * Updated compatibility-flag for WordPress 6.4
 * Compatible with WordPress Coding Standards 3.0
 * Removed language-files from plugin (except the json-files for Block Editor)
+
+= 1.0.8 =
+* Small optimizations
+* Removed JSON-language files from plugin
+* Updated compatibility-flag for WordPress 6.5

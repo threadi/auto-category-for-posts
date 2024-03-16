@@ -51,7 +51,6 @@ add_action( 'plugins_loaded', 'auto_category_update_check' );
  * @param WP_Post $post The Post-object.
  * @param bool    $update Whether the post has been updated (true) or added/inserts (false).
  * @return void
- * @noinspection PhpUnused
  */
 function auto_category_save_post( int $post_id, WP_Post $post, bool $update ): void {
 	// Only for new posts.
@@ -83,21 +82,24 @@ add_action( 'save_post', 'auto_category_save_post', 10, 3 );
  * @param array   $actions List of actions.
  * @param WP_Term $tag The term.
  * @return array
- * @noinspection PhpUnused
  */
 function auto_category_add_term_action( array $actions, WP_Term $tag ): array {
-	if ( 'category' === $tag->taxonomy ) :
-		$tax = get_taxonomy( 'category' );
-		if ( current_user_can( $tax->cap->manage_terms ) ) {
-			$text  = __( 'Set as default', 'auto-category-for-posts' );
-			$value = '';
-			if ( absint( get_option( AUTOCATEGORY_OPTIONNAME ) ) === $tag->term_id ) {
-				$text  = __( 'Default category', 'auto-category-for-posts' );
-				$value = ' class="default_category"';
-			}
-			$actions['auto_category'] = '<a href="#"' . $value . ' data-termid="' . $tag->term_id . '" data-nonce="' . wp_create_nonce( 'auto_category_change_state' ) . '">' . $text . '</a>';
-		}
-	endif;
+    // bail if it is not the category taxonomy.
+	if ( 'category' !== $tag->taxonomy ) {
+        return $actions;
+    }
+
+    // get taxonomy as object.
+    $tax = get_taxonomy('category');
+    if (current_user_can($tax->cap->manage_terms)) {
+        $text = __('Set as default', 'auto-category-for-posts');
+        $value = '';
+        if (absint(get_option(AUTOCATEGORY_OPTIONNAME)) === $tag->term_id) {
+            $text = __('Default category', 'auto-category-for-posts');
+            $value = ' class="default_category"';
+        }
+        $actions['auto_category'] = '<a href="#"' . $value . ' data-termid="' . $tag->term_id . '" data-nonce="' . wp_create_nonce('auto_category_change_state') . '">' . esc_html( $text ) . '</a>';
+    }
 	return $actions;
 }
 add_filter( 'tag_row_actions', 'auto_category_add_term_action', 10, 2 );
@@ -144,7 +146,6 @@ add_action( 'admin_enqueue_scripts', 'auto_category_load_ajax' );
  * Set new auto category by AJAX.
  *
  * @return void
- * @noinspection PhpUnused
  */
 function auto_category_ajax(): void {
 	$result = array(
@@ -188,7 +189,6 @@ function auto_category_ajax(): void {
 		}
 	}
 	// return the result.
-	echo wp_json_encode( $result );
-	exit;
+	wp_send_json( $result );
 }
 add_action( 'wp_ajax_auto_category_change_state', 'auto_category_ajax' );
