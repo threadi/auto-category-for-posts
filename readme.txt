@@ -2,15 +2,17 @@
 Contributors: threadi
 Tags: category, auto category, posts
 Requires at least: 5.8
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 7.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Stable tag: 1.0.8
 
+Define a default category for each new post before it is saved.
+
 == Description ==
 
-Define a default category for each new post. This will already be set during creation of the post. You must not choose the category yourself. Use your time for the content of your posts and not for their configuration.
+Define a default category for each new post before it is saved. This will already be set during creation of the post. You must not choose the category yourself. Use your time for the content of your posts and not for their configuration.
 
 == Installation ==
 
