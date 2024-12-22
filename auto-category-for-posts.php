@@ -84,22 +84,22 @@ add_action( 'save_post', 'auto_category_save_post', 10, 3 );
  * @return array
  */
 function auto_category_add_term_action( array $actions, WP_Term $tag ): array {
-    // bail if it is not the category taxonomy.
+	// bail if it is not the category taxonomy.
 	if ( 'category' !== $tag->taxonomy ) {
-        return $actions;
-    }
+		return $actions;
+	}
 
-    // get taxonomy as object.
-    $tax = get_taxonomy('category');
-    if (current_user_can($tax->cap->manage_terms)) {
-        $text = __('Set as default', 'auto-category-for-posts');
-        $value = '';
-        if (absint(get_option(AUTOCATEGORY_OPTIONNAME)) === $tag->term_id) {
-            $text = __('Default category', 'auto-category-for-posts');
-            $value = ' class="default_category"';
-        }
-        $actions['auto_category'] = '<a href="#"' . $value . ' data-termid="' . $tag->term_id . '" data-nonce="' . wp_create_nonce('auto_category_change_state') . '">' . esc_html( $text ) . '</a>';
-    }
+	// get taxonomy as object.
+	$tax = get_taxonomy( 'category' );
+	if ( current_user_can( $tax->cap->manage_terms ) ) {
+		$text  = __( 'Set as default', 'auto-category-for-posts' );
+		$value = '';
+		if ( absint( get_option( AUTOCATEGORY_OPTIONNAME ) ) === $tag->term_id ) {
+			$text  = __( 'Default category', 'auto-category-for-posts' );
+			$value = ' class="default_category"';
+		}
+		$actions['auto_category'] = '<a href="#"' . $value . ' data-termid="' . $tag->term_id . '" data-nonce="' . wp_create_nonce( 'auto_category_change_state' ) . '">' . esc_html( $text ) . '</a>';
+	}
 	return $actions;
 }
 add_filter( 'tag_row_actions', 'auto_category_add_term_action', 10, 2 );

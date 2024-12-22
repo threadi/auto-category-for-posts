@@ -50,8 +50,8 @@ OR use ant in build/-directory: `ant json-translations`
 
 ### Run
 
-`vendor/bin/phpcs --standard=WordPress file`
+`vendor/bin/phpcs --extensions=php --ignore=*/vendor/*,*/doc/*,*/svn/*,*/node_modules/* --standard=ruleset.xml .`
 
 ### Repair
 
-`vendor/bin/phpcbf --standard=WordPress file`
+`vendor/bin/phpcbf --extensions=php --ignore=*/vendor/*,*/doc/*,*/svn/*,*/node_modules/* --standard=ruleset.xml .`

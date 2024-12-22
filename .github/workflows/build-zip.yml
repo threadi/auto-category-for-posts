@@ -22,10 +22,10 @@ jobs:
                   composer update
 
             - name: Run WordPress Coding Standard fixes
-              run: vendor/bin/phpcbf --extensions=php --ignore=*/vendor/*,*/doc/*,*/svn/*,*/node_modules/*,*/gettext-helper.php,*/classes/multilingual-plugins/easy-language/pagebuilder/divi/build/,*/classes/multilingual-plugins/easy-language/blocks/*/build/,*translatepress* --standard=ruleset.xml .
+              run: vendor/bin/phpcbf --extensions=php --ignore=*/vendor/*,*/doc/*,*/svn/*,*/node_modules/* --standard=ruleset.xml .
 
             - name: Run WordPress Coding Standard checks
-              run: vendor/bin/phpcs --extensions=php --ignore=*/vendor/*,*/doc/*,*/svn/*,*/node_modules/*,*/gettext-helper.php,*/classes/multilingual-plugins/easy-language/pagebuilder/divi/build/,*/classes/multilingual-plugins/easy-language/blocks/*/build/,*translatepress* --standard=ruleset.xml .
+              run: vendor/bin/phpcs --extensions=php --ignore=*/vendor/*,*/doc/*,*/svn/*,*/node_modules/* --standard=ruleset.xml .
 
             - name: Set version number 1
               uses: richardrigutins/replace-in-files@v2
@@ -47,8 +47,8 @@ jobs:
                   rm -fr build
                   rm -fr releases
                   rm -fr languages
-                  rm -fr changelog.md
                   rm -fr svn
+                  rm changelog.md
                   rm readme.md
                   cd ..
                   zip -r -q ${{ github.event.repository.name }}_${{ github.ref_name }}.zip ${{ github.event.repository.name }}/* -x "*/.git/*" "*/.github/*" "*/blocks/*/src/*" "*/doc/*" "*/phpcs.xml" "*/composer.json" "*/composer.lock" "*/package.json" "*/package-lock.json" "*/.gitignore" "*/vendor/*" "*/node_modules/*" "/.editorconfig"
