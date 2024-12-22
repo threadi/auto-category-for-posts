@@ -6,7 +6,7 @@ Tested up to: 6.7
 Requires PHP: 7.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.0.8
+Stable tag: @@VersionNumber@@
 
 Define a default category for each new post before it is saved.
 
@@ -22,35 +22,8 @@ Define a default category for each new post before it is saved. This will alread
 
 == Changelog ==
 
-= 1.0.0 =
-* Initial commit
+= 1.0.9 =
+* Added GitHub action to build releases
+* Move this changelog to GitHub
 
-= 1.0.1 =
-* Using default_category instead of own option
-
-= 1.0.2 =
-* Security fix for AJAX-requests
-
-= 1.0.3 =
-* Updated compatibility-flag for WordPress 6.0
-
-= 1.0.4 =
-* Updated compatibility-flag for WordPress 6.0.1
-* Added build-system for repository
-
-= 1.0.5 =
-* Updated compatibility-flag for WordPress 6.2
-
-= 1.0.6 =
-* Updated compatibility-flag for WordPress 6.3
-* Compatible with WordPress Coding Standards
-
-= 1.0.7 =
-* Updated compatibility-flag for WordPress 6.4
-* Compatible with WordPress Coding Standards 3.0
-* Removed language-files from plugin (except the json-files for Block Editor)
-
-= 1.0.8 =
-* Small optimizations
-* Removed JSON-language files from plugin
-* Updated compatibility-flag for WordPress 6.5
+[older changes](https://github.com/threadi/auto-category-for-posts/blob/master/changelog.md)
