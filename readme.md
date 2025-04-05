@@ -25,7 +25,7 @@ Run in main directory:
 ### update translation-file
 
 1. Open .po-file of the language in PoEdit.
-2. Go to "Translate > "Update from POT-file".
+2. Go to "Translate" > "Update from POT-file".
 3. After this the new entries are added to the language-file.
 
 ### export translation-file
@@ -55,3 +55,11 @@ OR use ant in build/-directory: `ant json-translations`
 ### Repair
 
 `vendor/bin/phpcbf --extensions=php --ignore=*/vendor/*,*/doc/*,*/svn/*,*/node_modules/* --standard=ruleset.xml .`
+
+## Check for WordPress VIP Coding Standards
+
+Hint: this check runs against the VIP-GO-platform which is not our target for this plugin. Many warnings can be ignored.
+
+### Run
+
+`vendor/bin/phpcs --extensions=php --ignore=*/vendor/*,*/doc/*,*/svn/*,*/node_modules/* --standard=WordPress-VIP-Go .`

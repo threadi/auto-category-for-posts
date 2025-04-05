@@ -2,7 +2,7 @@
 Contributors: threadi
 Tags: category, auto category, posts
 Requires at least: 5.8
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 7.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -22,8 +22,8 @@ Define a default category for each new post before it is saved. This will alread
 
 == Changelog ==
 
-= 1.0.9 =
-* Added GitHub action to build releases
-* Move this changelog to GitHub
+= @@VersionNumber@@ =
+- Optimized check for WordPress Coding Standards
+- Set compatibility with WordPress 6.8
 
 [older changes](https://github.com/threadi/auto-category-for-posts/blob/master/changelog.md)
