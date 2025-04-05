@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.10] - 05.04.2025
+
+### Changed
+
+- Optimized check for WordPress Coding Standards
+- Set compatibility with WordPress 6.8
+
 ## [1.0.9] - 22.12.2024
 
 ### Added
@@ -17,7 +24,6 @@
 - Small optimizations
 - Removed JSON-language files from plugin
 - Updated compatibility-flag for WordPress 6.5
-
 
 ## [1.0.7] - 21.10.2023
 
