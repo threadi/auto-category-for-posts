@@ -25,6 +25,11 @@
 		<replace file="${src.dir}/${plugin.slug}-release.php">
 			<replacefilter token="@@VersionNumber@@" value="${plugin.version}" />
 		</replace>
+		<delete file="${build.dir}/readme-release.php"/>
+		<copy file="${src.dir}/readme.txt" tofile="${src.dir}/readme-release.txt"/>
+		<replace file="${src.dir}/readme-release.txt">
+			<replacefilter token="@@VersionNumber@@" value="${plugin.version}" />
+		</replace>
 	</target>
 
 	<!-- generate json-translations -->
@@ -39,10 +44,12 @@
 		<delete file="${build.dir}/${plugin.slug}_${plugin.version}.zip"/>
 		<zip destfile="${build.dir}/${plugin.slug}_${plugin.version}.zip">
 			<zipfileset dir="${src.dir}/admin" prefix="${plugin.slug}/admin" />
-			<zipfileset dir="${src.dir}" includes="uninstall.php,readme.txt" prefix="${plugin.slug}" />
+			<zipfileset dir="${src.dir}" includes="readme-release.txt" fullpath="${plugin.slug}/readme.txt" />
+			<zipfileset dir="${src.dir}" includes="uninstall.php" prefix="${plugin.slug}" />
 			<zipfileset dir="${src.dir}" includes="${plugin.slug}-release.php" fullpath="${plugin.slug}/${plugin.slug}.php" />
 		</zip>
 		<delete file="${src.dir}/${plugin.slug}-release.php"/>
+		<delete file="${src.dir}/readme-release.txt"/>
 	</target>
 
 	<!-- show help -->
